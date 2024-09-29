@@ -1,18 +1,8 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import { Poppins } from "next/font/google";
 import "./globals.css";
-
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+import SideBar from "@/components/sideBar";
+import { FaTwitter } from "react-icons/fa";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -27,7 +17,23 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <div className="grid grid-cols-1 md:grid-cols-12 h-[100dvh] w-screen max-w-5xl mx-auto">
+          <div className="col-span-3">
+            <div className="p-2 hover:bg-gray-700 cursor-pointer size-fit rounded-full transition-all">
+              <FaTwitter className="text-4xl text-gray-100" />
+            </div>
+            <SideBar />
+            <button className="rounded-full px-4 py-2 bg-blue-600 font-semibold">
+              Tweet
+            </button>
+          </div>
+          <div className="col-span-6 border-x-2 h-[100dvh] overflow-y-scroll border-slate-900">
+            {children}
+          </div>
+          <div className="col-span-3"></div>
+        </div>
+      </body>
     </html>
   );
 }
